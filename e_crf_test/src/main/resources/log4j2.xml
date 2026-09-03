@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n%throwable"/>
+        </Console>
+        
+        <File name="fout" fileName="_LOG/otherLOG.log" append="false">
+	        <PatternLayout>
+	            <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
+	        </PatternLayout>
+	    </File>
+	    
+	    <!--usato per il tracciamento delle strutture dati nelle classi:
+	    - WorkingList
+	    - LabInstrument
+	    - StandardInstrument  -->
+	    <File name="dataStructWL_File" fileName="_LOG/dataStructWL.log" append="false">
+		    <PatternLayout>
+		        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %m%n</Pattern>
+		    </PatternLayout>
+		</File>
+		
+		<!--usato per le clausole catch nella classe RunnerService  -->
+		<File name="ExceptionFile" fileName="_LOG/error.log" append="true">
+		    <PatternLayout>
+		        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %m%n</Pattern>
+		    </PatternLayout>
+		</File>
+		
+		<File name="TestFile" fileName="_LOG/test_output.log" append="false">
+		    <PatternLayout>
+		        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %n%m%n</Pattern>
+		    </PatternLayout>
+		</File>
+		
+		<!--usato per le comunicazioni API in RunnerService  -->
+		<File name="ReturnApiFile" fileName="_LOG/return_api.log" append="true">
+		    <PatternLayout>
+		        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %m%n</Pattern>
+		    </PatternLayout>
+		</File>
+		
+		<!--usato per tracciare branching logic BLOCCANTI -->
+		<File name="BranchingLogicBloccantiFile" fileName="_LOG/BranchingLogicBloccanti.log" append="false">
+		    <PatternLayout>
+		        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %m%n</Pattern>
+		    </PatternLayout>
+		</File>
+		
+		<!--usato per tracciare lo stack delle chiamate -->
+		<RollingFile name="TraceFile" 
+                     fileName="logs/trace.log" 
+                     filePattern="logs/trace-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+		
+    </Appenders>
+    
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="fout"/>
+        </Root>
+        
+        <Logger name="optional_log" level="info" additivity="false">
+		    <AppenderRef ref="fout"/>
+		</Logger>
+        
+        <Logger name="dataStructWL_Logger" level="info" additivity="false">
+		    <AppenderRef ref="dataStructWL_File"/>
+		</Logger>
+		
+		<Logger name="exceptionOutputLogger" level="info" additivity="false">
+		    <AppenderRef ref="ExceptionFile"/>
+		</Logger>
+		
+		<Logger name="testOutputLogger" level="info" additivity="false">
+		    <AppenderRef ref="TestFile"/>
+		</Logger>
+		
+		<Logger name="returnApiLogger" level="info" additivity="false">
+		    <AppenderRef ref="ReturnApiFile"/>
+		</Logger>
+		
+		<Logger name="bl_Logger" level="info" additivity="false">
+		    <AppenderRef ref="BranchingLogicBloccantiFile"/>
+		</Logger>
+		
+		<Logger name="mi.istitutotumori.tracing" level="trace" additivity="false">
+            <AppenderRef ref="TraceFile"/>
+            <AppenderRef ref="ConsoleAppender"/>
+        </Logger>
+    </Loggers>
+    
+    <!-- dichiarazione da usare nelle classi:
+     private static final Logger returnApi = LogManager.getLogger("returnApiLogger");  -->
+    
+</Configuration>

@@ -1,0 +1,62 @@
+name: Archiviazione Storico Traffico e Cloni
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Ogni domenica a mezzanotte
+  workflow_dispatch: # Permette l'avvio manuale
+
+# Concede all'action i permessi di scrittura necessari per fare il push del codice
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: Scarica dati traffico e cloni
+        env:
+          HG_TOKEN: ${{ secrets.TRAFFIC_ACTION_TOKEN }}
+          REPO_NAME: ${{ github.repository }} # Estraiamo la variabile qui per evitare conflitti con curl
+        run: |
+          mkdir -p traffic_data
+          
+          # Scarica i dati dei Cloni
+          curl -H "Authorization: Bearer $HG_TOKEN" \
+               -H "Accept: application/vnd.github+json" \
+               "https://api.github.com/repos/gfzanotti/REDCap_test/traffic/clones" \
+               > traffic_data/clones.json
+               
+          # Scarica i dati delle Visite
+          curl -H "Authorization: Bearer $HG_TOKEN" \
+               -H "Accept: application/vnd.github+json" \
+               "https://api.github.com/repos/gfzanotti/REDCap_test/traffic/views" \
+               > traffic_data/views.json
+
+      - name: Salva i dati nel repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Recupera lo stato di tutti i branch remoti
+          git fetch origin
+          
+          # Controlla se il branch 'traffic' esiste già su GitHub. 
+          # Se esiste lo scarica, altrimenti crea un branch orfano (vuoto e pulito)
+          if git show-ref --verify --quiet refs/remotes/origin/traffic; then
+            git checkout traffic
+          else
+            git checkout --orphan traffic
+            git rm -rf .
+          fi
+          
+          # Sposta i file JSON scaricati nella cartella principale
+          mv traffic_data/* .
+          rmdir traffic_data
+          
+          # Aggiunge i file e fa il push
+          git add clones.json views.json
+          git commit -m "Aggiornato storico traffico statistico [automated]" || exit 0
+          git push origin traffic

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Priority?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mi.istitutotumori.app.controller.RootController">
+
+    <!-- ─────────── TOP: Menu Bar ─────────── -->
+    
+        <top>
+        <MenuBar>
+            <menus>
+
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Exit" onAction="#onExit"/>
+                    </items>
+                </Menu>
+
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="Show Documentation" onAction="#showDocs"/>
+                    </items>
+                </Menu>
+
+            </menus>
+        </MenuBar>
+    </top>
+    
+    
+    <!--
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Run"     onAction="#onRun" />
+                <MenuItem text="Toggle Theme" onAction="#toggleTheme" />
+                <MenuItem text="Show Docs"   onAction="#showDocs" />
+                <MenuItem text="Exit"    onAction="#onExit" />
+            </Menu>
+        </MenuBar>
+    </top>
+		
+	-->
+
+
+    <!-- ─────────── CENTER: Tab Pane (vuoto, popolato da MainApp) ─────────── -->
+    <center>
+        <TabPane fx:id="tabPane" />
+    </center>
+
+    <!-- ─────────── BOTTOM: Buttons (optional) ─────────── -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <children>
+                <Button fx:id="runButton"   text="Run"         onAction="#onRun" />
+                <Button fx:id="themeButton" text="Tema: Light" onAction="#toggleTheme" />
+            </children>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </HBox>
+    </bottom>
+
+</BorderPane>
+
+
+<!-- VECCHIO
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.controller.RootController">
+    <top>
+        <MenuBar>
+            <menus>
+
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Exit" onAction="#onExit"/>
+                    </items>
+                </Menu>
+
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="Show Documentation" onAction="#showDocs"/>
+                    </items>
+                </Menu>
+
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabPane">
+            <tabs>
+                <Tab text="Instrument Lab" closable="false">
+                    <content><fx:include source="Lab.fxml"/></content>
+                </Tab>
+                <Tab text="Instruments Standard" closable="false">
+                    <content><fx:include source="Standard.fxml"/></content>
+                </Tab>
+                <Tab text="Med Histo" closable="false">
+                    <content><fx:include source="MedHisto.fxml"/></content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+
+    <bottom>
+		<BorderPane>
+	        <left>
+	            <Button text="Tema" fx:id="themeButton" onAction="#toggleTheme"/>
+	        </left>
+	
+	        <right>
+	            <Button text="Esegui"
+	                    fx:id="runButton"
+	                    onAction="#onRun"
+	                    styleClass="run-button"/>
+	        </right>
+	    </BorderPane>
+        
+    </bottom>
+</BorderPane>
+
+
+-->

@@ -1,0 +1,117 @@
+/* ---------------------------------------
+   PALETTE (ACQUAMARINA + TONI PASTELLO)
+   --------------------------------------- */
+
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "San Francisco", sans-serif;
+    -fx-background-color: #F7FAFA; /* bianco freddo */
+    -fx-padding: 12;
+    -fx-font-size: 1.4em;
+}
+
+/* ------------ LABELS ------------- */
+
+.info-label {
+    -fx-text-fill: #6C7A89;  /* grigio azzurrato */
+    -fx-font-size: 1.2em;
+}
+
+/* ------------ BUTTONS ------------- */
+
+.button {
+    -fx-background-radius: 9;
+    -fx-padding: 8 20;
+    -fx-font-size: 1.3em;
+    -fx-border-color: transparent;
+
+    /* colore principale acqua marina */
+    -fx-background-color: #A4E9E6;
+    -fx-text-fill: #2E4F4E;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4,0,0,2);
+}
+
+.button:hover {
+    -fx-background-color: #92DFDB;
+}
+
+.button:pressed {
+    -fx-background-color: #7FD3CF;
+}
+
+/* Run Button → Corallo pastello */
+.run-button {
+    -fx-background-color: #FFBCB3;
+    -fx-text-fill: #5C2E2A;
+}
+
+.run-button:hover {
+    -fx-background-color: #FFAFA5;
+}
+
+/* ------------ TEXTFIELDS ------------ */
+
+.text-field {
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CFE4E3; /* azzurro chiarissimo */
+    -fx-padding: 7 10;
+    -fx-font-size: 1.3em;
+}
+
+.text-field:focused {
+    -fx-border-color: #A4E9E6; /* acqua marina */
+}
+
+/* ------------ COMBOBOX ------------ */
+
+.combo-box {
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
+    -fx-border-color: #CFE4E3;
+    -fx-background-color: #FFFFFF;
+}
+
+.combo-box:focused {
+    -fx-border-color: #A4E9E6;
+}
+
+.list-cell:hover {
+    -fx-background-color: #E6FFFC;  /* appena un tocco acqua */
+}
+
+/* ------------ TABPANE ------------ */
+
+.tab-pane {
+    -fx-open-tab-animation: NONE;
+    -fx-close-tab-animation: NONE;
+}
+
+.tab {
+    -fx-padding: 8 14;
+    -fx-background-insets: 0;
+}
+
+.tab-header-area .tab {
+    -fx-background-color: #D9F7F6; /* acqua chiarissimo */
+    -fx-background-radius: 6 6 0 0;
+}
+
+.tab-header-area .tab:selected {
+    -fx-background-color: #A4E9E6; /* più saturo */
+}
+
+/* ------------ MENUBAR ------------ */
+
+.menu-bar {
+    -fx-background-color: #E0FEFC;
+}
+
+.menu:hover {
+    -fx-background-color: #C9F7F4;
+}
+
+.menu-item:hover {
+    -fx-background-color: #C9F7F4;
+}

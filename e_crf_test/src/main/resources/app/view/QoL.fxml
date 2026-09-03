@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Priority?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mi.istitutotumori.app.controller.QoLController"
+      spacing="20"
+      style="-fx-padding: 20;">
+
+    <children>
+
+        <GridPane hgap="20" vgap="15">
+        
+	        <columnConstraints>
+		        <ColumnConstraints hgrow="ALWAYS" />
+		        <ColumnConstraints hgrow="ALWAYS" />
+		    </columnConstraints>
+
+            <children>
+
+                <TextField fx:id="tokenQoL"
+                           promptText="Token di IMPORT (obbligatorio)"
+                           styleClass="text-field"
+                           GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <Label text="Token new Project"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <TextField fx:id="surveyName"
+                			text="survey_questionnaires"
+                           promptText="Name of survey"
+                           styleClass="text-field"
+                           GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <Label text="Nome della survey"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <TextField fx:id="recordId"
+                           promptText="Record ID"
+                           styleClass="text-field"
+                           GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <Label text="ID record"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                       
+                <ComboBox fx:id="combo1QoL"
+                          prefWidth="300"
+                          GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <Label text="Seleziona Output"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+            </children>
+
+        </GridPane>
+
+    </children>
+
+</VBox>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Priority?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mi.istitutotumori.app.controller.LabController"
+      spacing="20"
+      style="-fx-padding: 20;">
+
+    <children>
+
+        <GridPane hgap="20" vgap="15">
+        
+	        <columnConstraints>
+		        <ColumnConstraints hgrow="ALWAYS" />
+		        <ColumnConstraints hgrow="ALWAYS" />
+		    </columnConstraints>
+
+            <children>
+
+                <TextField fx:id="tokenLab"
+                           promptText="Token di IMPORT (obbligatorio)"
+                           styleClass="text-field"
+                           GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <Label text="Token new Project"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <TextField fx:id="surveyLabName"
+                		   text="survey_lab_data"
+                           promptText="Name of survey"
+                           styleClass="text-field"
+                           GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <Label text="Nome della survey"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <TextField fx:id="RecordLabId"
+                           promptText="Record ID"
+                           styleClass="text-field"
+                           GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <Label text="ID del record"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                       
+                       
+                <ComboBox fx:id="combo1"
+                          prefWidth="300"
+                          GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <Label text="Seleziona Output"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1" />
+					   
+				<ComboBox fx:id="comboSceltaProgetto"
+                          prefWidth="300"
+                          GridPane.rowIndex="9" GridPane.columnIndex="0" />
+                <Label text="che tipo di progetto vuoi fare?"
+                       GridPane.rowIndex="9" GridPane.columnIndex="1" />
+
+            </children>
+
+        </GridPane>
+        <!-- AREA DI OUTPUT RISULTATI -->
+        <TextArea fx:id="outputArea"
+                  prefWidth="800"
+                  prefHeight="300"
+                  wrapText="true"
+                  style="-fx-font-family: Consolas; -fx-font-size: 14px;" />
+
+    </children>
+
+</VBox>

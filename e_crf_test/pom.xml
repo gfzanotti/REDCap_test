@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>mi.istitutotumori</groupId>
+	<artifactId>e_crf</artifactId>
+	<version>1.1.1</version>
+	<name>e_crf</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<!-- <javafx.version>17.0.17</javafx.version> -->
+		<javafx.version>17.0.17</javafx.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<javaparser.version>3.25.7</javaparser.version>
+		<javafx.platform>win</javafx.platform>
+
+		<maven.project.sourceRoots.warningsDisabled>true</maven.project.sourceRoots.warningsDisabled>
+
+	</properties>
+
+	<!-- DEPENDENCY MANAGEMENT (BOMs) -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.11.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>2.17.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- DEPENDENCIES -->
+	<dependencies>
+
+		<!-- JUnit -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+    		<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JavaFX (Windows) -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>${javafx.version}</version>
+			<!-- <exclusions>
+				<exclusion>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx</artifactId>
+				</exclusion>
+			</exclusions>-->
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-web</artifactId>
+			<version>${javafx.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>${javafx.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.apache.pdfbox</groupId>
+	        <artifactId>pdfbox</artifactId>
+	        <version>2.0.30</version>
+	    </dependency>
+
+
+		<!--
+	
+	        <dependency>
+	            <groupId>org.openjfx</groupId>
+	            <artifactId>javafx-graphics</artifactId>
+	            <version>${javafx.version}</version>
+	            <classifier>win</classifier>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.openjfx</groupId>
+	            <artifactId>javafx-base</artifactId>
+	            <version>${javafx.version}</version>
+	            <classifier>win</classifier>
+	        </dependency>
+	        -->
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.22.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.22.1</version>
+		</dependency>
+
+		<!-- Apache HTTP Client -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.16</version>
+		</dependency>
+
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+		</dependency>
+
+		<!-- CSV -->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.12.0</version>
+		</dependency>
+
+		<!-- OkHttp -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okio</groupId>
+			<artifactId>okio</artifactId>
+			<version>3.16.0</version>
+		</dependency>
+
+		<!--<dependency>
+	        	<groupId>mi.istitutotumori</groupId>
+	        	<artifactId>e_crf</artifactId>
+	        	<version>0.1.0</version>
+	    </dependency> -->
+
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-core</artifactId>
+			<version>${javaparser.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-symbol-solver-core</artifactId>
+			<version>${javaparser.version}</version>
+		</dependency>
+		
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.9.22</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.aspectj</groupId>
+	        <artifactId>aspectjweaver</artifactId>
+	        <version>1.9.24</version>
+	    </dependency>
+	</dependencies>
+
+	<!-- BUILD PLUGINS -->
+	<build>
+		<plugins>
+			<!-- Compiler -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
+
+			<!-- Shade plugin per creare jar eseguibile -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.5.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>mi.istitutotumori.app.MainApp</mainClass>
+								</transformer>
+							</transformers>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- JavaFX plugin solo per eseguire l'app -->
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.8</version>
+				<configuration>
+					<mainClass>mi.istitutotumori.app.MainApp</mainClass>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.6.2</version>
+				<executions>
+					<execution>
+						<id>generate-javadocs</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>javadoc</goal>
+						</goals>
+						<configuration>
+							<!-- Mettiamo esplicitamente il Javadoc in: target/site/apidocs --> 
+							<outputDirectory> ${project.build.directory}/site/apidocs </outputDirectory>
+
+							<release>17</release>
+							<encoding>UTF-8</encoding>
+							
+							<!-- INCLUDI CLASSI PACKAGE-PRIVATE E PRIVATE --> 
+							<show>private</show>
+							<!-- Genera le pagine HTML dei sorgenti .java -->
+							<linksource>true</linksource>
+							
+							<!-- Assicura che vengano analizzati tutti i package sotto mi.istitutotumori --> 
+							<subpackages>mi.istitutotumori</subpackages> 
+							
+							<doctitle> ${project.name} ${project.version} API </doctitle> 
+							<windowtitle> ${project.name} API </windowtitle>
+							
+							<failOnError>false</failOnError>
+
+							<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+					
+							<!-- ESEMPIO TAG PERSONALIZZATI -->
+							<tags>
+								<tag>
+									<name>apiNote</name>
+									<placement>a</placement>
+									<head>API Note:</head>
+								</tag>
+								<tag>
+									<name>implSpec</name>
+									<placement>a</placement>
+									<head>Implementation Requirements:</head>
+								</tag>
+								<tag>
+									<name>implNote</name>
+									<placement>a</placement>
+									<head>Implementation Note:</head>
+								</tag>
+							</tags>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Exec Plugin per eseguire il generatore UML in AUTOMATICO -->
+			<!--
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.1.0</version>
+					<executions>
+						<execution>
+							<id>generate-uml</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>java</goal>
+							</goals>
+							<configuration>
+								<mainClass>com.example.uml.GenerateUMLAdvanced</mainClass>
+								<arguments>
+									<argument>src/main/java</argument>
+									<argument>target/diagram.puml</argument>
+								</arguments>
+								<includeProjectDependencies>true</includeProjectDependencies>
+								<includePluginDependencies>false</includePluginDependencies>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				-->
+			<!-- Exec Plugin per eseguire il generatore UML MANUALMENTE -->
+			<!--  mvn clean compile  ;  2. Poi esegui il generatore UML  mvn
+			exec:java -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+
+				<executions>
+				
+					<!-- ESECUZIONE UML_1 -->
+					<execution>
+						<id>run-uml-1</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>utility.Uml_1</mainClass>
+						</configuration>
+					</execution>
+
+					<!-- ESECUZIONE UML_0 -->
+					<execution>
+						<id>run-uml-0</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>utility.Uml_0</mainClass>
+						</configuration>
+					</execution>
+					
+					<!-- ESECUZIONE UML_2 -->
+					<execution>
+						<id>run-uml-2</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>utility.Uml_2</mainClass>
+						</configuration>
+					</execution>
+					
+					
+				</executions>
+			</plugin>
+			
+			<!-- IMPOSTAZIONE ESECUZIONE  & PMD-->
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-pmd-plugin</artifactId>
+			    <version>3.21.0</version>
+			
+			    <configuration>
+			        <failOnViolation>false</failOnViolation>
+			        <rulesets>
+			            <ruleset>src/main/resources/pmd-ruleset.xml</ruleset>
+			        </rulesets>
+			        <printFailingErrors>true</printFailingErrors>
+			    </configuration>
+			
+			    <executions>
+			        <execution>
+			            <phase>verify</phase>
+			            <goals>
+			                <goal>check</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+			<!-- -->
+			
+			
+
+		</plugins>
+
+		<!-- Directory di output per le risorse -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	
+	<profiles>
+  <profile>
+    <id>uml1</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <mainClass>utility.Uml_1</mainClass>
+            <arguments>
+              <argument>src/main/java</argument>
+              <argument>C:/Users/zanottigianfranco/Desktop/pUML/Uml_1.puml</argument>
+            </arguments>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+
+  <profile>
+    <id>uml0</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <mainClass>utility.Uml_0</mainClass>
+            <arguments>
+              <argument>src/main/java</argument>
+              <argument>C:/Users/zanottigianfranco/Desktop/pUML/Uml_0.puml</argument>
+            </arguments>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+  
+  <profile>
+    <id>uml2</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <mainClass>utility.Uml_2</mainClass>
+            <arguments>
+              <argument>src/main/java</argument>
+              <argument>C:/Users/zanottigianfranco/Desktop/pUML/Uml_2.puml</argument>
+            </arguments>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
+	
+
+</project>

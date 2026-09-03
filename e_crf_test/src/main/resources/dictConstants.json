@@ -1,0 +1,280 @@
+{"firstRows":
+	{
+		"field_name": {
+		      "0": "record_id",
+		      "1": "lab_test",
+		      "2": "hlt_date",
+		      "3": "alert_lb0",
+		      "4": "alert_lb9",
+		      "5": "lab_d_2",
+		      "6": "hematology_lab_test",
+		      "7": "alert_lb",
+		      "8": "alert_lb1",
+		      "9": "alert_lb8"
+		    },
+		    "form_name": {
+		      "0": "form_1",
+		      "1": "laboratory_data",
+		      "2": "laboratory_data",
+		      "3": "laboratory_data",
+		      "4": "laboratory_data",
+		      "5": "laboratory_data",
+		      "6": "laboratory_data",
+		      "7": "laboratory_data",
+		      "8": "laboratory_data",
+		      "9": "laboratory_data"
+		    },
+		    "section_header": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "field_type": {
+		      "0": "text",
+		      "1": "yesno",
+		      "2": "text",
+		      "3": "descriptive",
+		      "4": "descriptive",
+		      "5": "descriptive",
+		      "6": "yesno",
+		      "7": "descriptive",
+		      "8": "descriptive",
+		      "9": "descriptive"
+		    },
+		    "field_label": {
+		      "0": "Record ID",
+		      "1": "Laboratory tests performed?",
+		      "2": "Date",
+		      "3": "<div class=\"rich-text-field-label\"><p style=\"text-align: center;\"><span style=\"color: #e03e2d;\">GLI ESAMI DEL SANGUE NON SI SCARICANO LA DOMENICA</span></p></div>",
+		      "4": "<div class=\"rich-text-field-label\"><p style=\"text-align: center;\"><span style=\"color: #e03e2d;\">NEL CASO IN CUI NEI MENU' A TENDINA DI UNITA' DI MISURA, MINIMO E MASSIMO NON SIANO PRESENTI I VALORI DA RACCOGLIERE E' NECESSARIO USCIRE DA QUESTO STRUMENTO (SALVANDOLO) E INSERIRE TALI VALORI NELLO STRUMENTO \"CONFIGURATION OF LAB DATA\" (SALVANDOLI) PER POI RIENTRARE IN QUESTO STRUMENTO</span></p></div>",
+		      "5": "<div class=\"header\">LABORATORY DATA  (Day -2)</div>",
+		      "6": "Hematology laboratory tests performed?",
+		      "7": "<div class=\"rich-text-field-label\"><h3 style=\"text-align: center;\"><span style=\"font-weight: normal; color: #e03e2d;\">ERROR! Current laboratory date <= Previous</span><span style=\"color: #e03e2d;\"> </span><span style=\"color: #e03e2d; font-weight: normal;\">laboratory date</span></h3></div>",
+		      "8": "<div class=\"rich-text-field-label\"><h3 style=\"text-align: center;\"><span style=\"font-weight: normal; color: #e03e2d;\">ERROR! Current laboratory date <= Consent date</span></h3></div>",
+		      "9": "<div class=\"rich-text-field-label\"><h3 style=\"text-align: center;\"><span style=\"font-weight: normal; color: #e03e2d;\">ERROR! Current laboratory date <> Current administered therapy - 2 days<br /></span></h3></div>"
+		    },
+		    "select_choices_or_calculations": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "field_note": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "text_validation_type_or_show_slider_number": {
+		      "0": "",
+		      "1": "",
+		      "2": "date_dmy",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "text_validation_min": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "text_validation_max": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "identifier": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "branching_logic": {
+		      "0": "",
+		      "1": "",
+		      "2": "[lab_test] = '1'",
+		      "3": "[user-dag-label]='INT'",
+		      "4": "",
+		      "5": "[event-name] = 'c1_arm_1' or [event-name] = 'c4_arm_1' or [event-name] = 'c7_arm_1' or [event-name] = 'c10_arm_1' or [event-name] = 'c1_acp__fla_arm_1' or [event-name] = 'c2_acp__fla_arm_1' or [event-name] = 'c3_acp__fla_arm_1' or [event-name] = 'c4_acp__fla_arm_1'",
+		      "6": "",
+		      "7": "datediff ([previous-event-name][hlt_date],[event-name][hlt_date] ,\"d\",\"dmy\",true)<=0",
+		      "8": "datediff ([screening__baselin_arm_1][if_yes_specify_the_date],[event-name][hlt_date]  ,\"d\",\"dmy\",true)<=0",
+		      "9": "(([event-name] = 'c1_arm_1' and [c1_arm_1][hlt_date]<>'' and datediff ([c1_arm_1][hlt_date],[c1_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c4_arm_1' and [c4_arm_1][hlt_date]<>'' and datediff ([c4_arm_1][hlt_date],[c4_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c7_arm_1' and [c7_arm_1][hlt_date]<>'' and datediff ([c7_arm_1][hlt_date],[c7_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c10_arm_1' and [c10_arm_1][hlt_date]<>'' and datediff ([c10_arm_1][hlt_date],[c10_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c1_acp__fla_arm_1' and [c1_acp__fla_arm_1][hlt_date]<>'' and datediff ([c1_acp__fla_arm_1][hlt_date],[c1_acp__fla_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c2_acp__fla_arm_1' and [c2_acp__fla_arm_1][hlt_date]<>'' and datediff ([c2_acp__fla_arm_1][hlt_date],[c2_acp__fla_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c3_acp__fla_arm_1' and [c3_acp__fla_arm_1][hlt_date]<>'' and datediff ([c3_acp__fla_arm_1][hlt_date],[c3_acp__fla_arm_1][chemotherapy] ,\"d\",\"dmy\",true)<>2)\nor ([event-name] = 'c4_acp__fla_arm_1' and [c4_acp__fla_arm_1][hlt_date] <>'' and datediff ([c4_acp__fla_arm_1][hlt_date],[c4_acp__fla_arm_1][chemotherapy]  ,\"d\",\"dmy\",true)<>2))"
+		    },
+		    "required_field": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "custom_alignment": {
+		      "0": "RH",
+		      "1": "RH",
+		      "2": "RH",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "RH",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "question_number": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "matrix_group_name": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "matrix_ranking": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    },
+		    "field_annotation": {
+		      "0": "",
+		      "1": "",
+		      "2": "",
+		      "3": "",
+		      "4": "",
+		      "5": "",
+		      "6": "",
+		      "7": "",
+		      "8": "",
+		      "9": ""
+		    }
+	},
+	
+"firstRows_Init":
+	{
+	"Variable / Field Name": {"2": "hlt_date", "1": "lab_test", "0": "record_id"},
+	"Form Name": {"2": "laboratory_data", "1": "laboratory_data", "0": "form_1"},
+	"Section Header": {"2": "", "1": "", "0": ""},
+	"Field Type": {"2": "text", "1": "yesno", "0": "text"},
+	"Field Label": {"2": "Date", "1": "Laboratory tests performed?", "0":"Record ID"},
+	"Choices, Calculations, OR Slider Labels": {"2": "", "1": "", "0": ""},
+	"Field Note": {"2": "", "1": "", "0": ""},
+	"Text Validation Type OR Show Slider Number": {"2": "date_dmy", "1": "", "0": ""},
+	"Text Validation Min": {"2": "", "1": "", "0": ""},
+	"Text Validation Max": {"2": "", "1": "", "0": ""},
+	"Identifier?": {"2": "", "1": "", "0": ""},
+	"Branching Logic (Show field only if...)": {"2": "[lab_test] = '1'", "1": "", "0": ""},
+	"Required Field?": {"2": "", "1": "", "0": ""},
+	"Custom Alignment": {"2": "RH", "1": "RH", "0": "RH"},
+	"Question Number (surveys only)": {"2": "", "1": "", "0": ""},
+	"Matrix Group Name": {"2": "", "1": "", "0": ""},
+	"Matrix Ranking?": {"2": "", "1": "", "0": ""},
+	"Field Annotation": {"2": "", "1": "", "0": ""}
+	},
+
+"neutralRow":
+	{
+	"Variable / Field Name": "VAR",
+	"Form Name": "DESC_INSTRUMENT",
+	"Section Header": "",
+	"Field Type": "TYPE",
+	"Field Label": "DESC",
+	"Choices, Calculations, OR Slider Labels": "",
+	"Field Note": "(eg 1.60)",
+	"Text ValidationEG Type OR Show Slider Number": "",
+	"Text Validation Min": "",
+	"Text Validation Max": "",
+	"Identifier?": "",
+	"Branching Logic (Show field only if...)": "",
+	"Required Field?": "",
+	"Custom Alignment":"RH",
+	"Question Number (surveys only)": "",
+	"Matrix Group Name": "",
+	"Matrix Ranking?": "",
+	"Field Annotation": ""
+	},
+	
+"examSet":
+	{
+	"_01": "hematology",
+	"_02": "chemistry",
+	"_03": "urinanalisys",
+	"_04": "virology",
+	"_05": "coagulation",
+	"_06": "tumor_marker",
+	"_07": "thyroid",
+	"_08": "pregnancy",
+	"_09": "nerone"
+	},
+	
+"tokenList":
+	{}
+}

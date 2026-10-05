@@ -1,0 +1,164 @@
+/* =========================================================
+   GLUON DARK — BLUE CYAN (HIGH READABILITY)
+   ========================================================= */
+
+/* ------------ ROOT ------------ */
+
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "San Francisco", sans-serif;
+    -fx-font-size: 1.4em;
+
+    -fx-background-color: #57585B;
+    -fx-text-fill: #F1F3F4;
+
+    -fx-padding: 16;
+
+    /* Accent palette */
+    -accent: #4AA3FF;
+    -accent-strong: #2F8BFF;
+}
+
+/* ------------ LABELS ------------ */
+
+.label {
+    -fx-text-fill: #F1F3F4;
+}
+
+.info-label {
+    -fx-text-fill: #C5CBD3;
+    -fx-font-size: 1.1em;
+}
+
+/* ------------ BUTTONS ------------ */
+
+.button {
+    -fx-background-radius: 10;
+    -fx-padding: 0.75em 1.7em;
+    -fx-font-size: 1.3em;
+
+    -fx-background-color: #1A1D23;
+    -fx-text-fill: -accent;
+
+    -fx-border-color: transparent;
+
+    -fx-effect: dropshadow(gaussian,
+        rgba(0,0,0,0.7),
+        6, 0.25, 0, 3);
+}
+
+.button:hover {
+    -fx-background-color: #222733;
+}
+
+.button:pressed {
+    -fx-background-color: #2B3344;
+}
+
+/* Primary / Run */
+
+.run-button {
+    -fx-background-color: -accent-strong;
+    -fx-text-fill: #081615;
+}
+
+.run-button:hover {
+    -fx-background-color: -accent;
+}
+
+/* ------------ TEXTFIELDS ------------ */
+
+.text-field {
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+
+    -fx-background-color: #1A1D23;
+    -fx-border-color: #2B3344;
+
+    -fx-text-fill: #F1F3F4;
+    -fx-prompt-text-fill: #8B93A1;
+
+    -fx-padding: 0.65em 1em;
+    -fx-font-size: 1.3em;
+}
+
+.text-field:focused {
+    -fx-border-color: -accent;
+    -fx-background-color: #1F2430;
+}
+
+/* ------------ COMBOBOX ------------ */
+
+.combo-box {
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+
+    -fx-background-color: #1A1D23;
+    -fx-border-color: #2B3344;
+
+    -fx-text-fill: #F1F3F4;
+}
+
+.combo-box:focused {
+    -fx-border-color: -accent;
+}
+
+/* Dropdown list */
+
+.list-cell {
+    -fx-background-color: #1A1D23;
+    -fx-text-fill: #F1F3F4;
+}
+
+.list-cell:hover {
+    -fx-background-color: #222733;
+}
+
+/* ------------ CHECKBOX ------------ */
+
+.check-box {
+    -fx-text-fill: #F1F3F4;
+}
+
+.check-box .mark {
+    -fx-background-color: #2B3344;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -accent;
+}
+
+/* ------------ TABPANE ------------ */
+
+.tab-pane {
+    -fx-open-tab-animation: NONE;
+    -fx-close-tab-animation: NONE;
+}
+
+.tab {
+    -fx-padding: 0.75em 1.3em;
+}
+
+.tab-header-area .tab {
+    -fx-background-color: #87888A;
+    -fx-background-radius: 9 9 0 0;
+    -fx-text-fill: #C5CBD3;
+}
+
+.tab-header-area .tab:selected {
+    -fx-background-color: #87888A;
+    -fx-text-fill: -accent;
+}
+
+/* ------------ MENUBAR ------------ */
+
+.menu-bar {
+    -fx-background-color: #12141A;
+}
+
+.menu, .menu-item {
+    -fx-text-fill: #F1F3F4;
+}
+
+.menu-item:hover {
+    -fx-background-color: #222733;
+}

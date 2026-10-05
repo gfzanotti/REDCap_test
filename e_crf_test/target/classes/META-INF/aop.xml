@@ -1,0 +1,11 @@
+<aspectj>
+
+    <aspects>
+        <aspect name="mi.istitutotumori.tracing.TraceAspect"/>
+    </aspects>
+
+    <weaver options="-verbose">
+        <include within="mi.istitutotumori..*"/>
+    </weaver>
+
+</aspectj>

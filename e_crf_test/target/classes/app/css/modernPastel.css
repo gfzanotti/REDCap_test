@@ -1,0 +1,122 @@
+/* --- ROOT COLORS (PASTEL PALETTE) --- */
+
+.root {
+    -fx-font-family: "Segoe UI", "San Francisco", "Roboto", sans-serif;
+
+    -fx-background-color: #FAFAFF; /* sfondo chiaro leggerissimo */
+    -fx-padding: 10;
+}
+
+/* --- LABELS --- */
+
+.info-label {
+    -fx-text-fill: #6C6F7F;
+    -fx-font-size: 13px;
+}
+
+/* --- BUTTONS --- */
+
+.button {
+    -fx-background-radius: 8;
+    -fx-padding: 8 18;
+    -fx-font-size: 13px;
+
+    /* Pastello */
+    -fx-background-color: #AEE2FF;
+    -fx-text-fill: #2A4158;
+
+    -fx-border-color: transparent;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 3, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #92D6FF;
+}
+
+.button:pressed {
+    -fx-background-color: #79C7F8;
+}
+
+/* Special button (Run) */
+
+.run-button {
+    -fx-background-color: #CDEAC0; /* pastello verde */
+    -fx-text-fill: #2D4A2A;
+}
+
+.run-button:hover {
+    -fx-background-color: #B7E0AA;
+}
+
+/* --- TEXTFIELDS --- */
+
+.text-field {
+    -fx-background-radius: 6;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDE3F0;
+    -fx-border-radius: 6;
+
+    -fx-font-size: 13px;
+    -fx-padding: 6 10;
+}
+
+.text-field:focused {
+    -fx-border-color: #96B9FF; /* blu pastello */
+    -fx-background-color: #FFFFFF;
+}
+
+/* --- COMBOBOX --- */
+
+.combo-box {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+
+    -fx-border-color: #DDE3F0;
+    -fx-background-color: #FFFFFF;
+}
+
+.combo-box:focused {
+    -fx-border-color: #96B9FF;
+}
+
+/* Dropdown list */
+.list-cell:hover {
+    -fx-background-color: #E8F1FF;
+}
+
+/* --- TABPANE --- */
+
+.tab-pane {
+    -fx-open-tab-animation: NONE;
+    -fx-close-tab-animation: NONE;
+}
+
+.tab {
+    -fx-background-insets: 0;
+    -fx-padding: 8 14;
+}
+
+.tab-header-area .tab:selected {
+    -fx-background-color: #D7E8FF; /* azzurro tenue */
+    -fx-background-radius: 6 6 0 0;
+}
+
+.tab-header-area .tab {
+    -fx-background-color: #EFF5FF;
+    -fx-background-radius: 6 6 0 0;
+}
+
+/* --- MENU BAR --- */
+
+.menu-bar {
+    -fx-background-color: #E8F1FF;
+}
+
+.menu:hover {
+    -fx-background-color: #D7E8FF;
+}
+
+.menu-item:hover {
+    -fx-background-color: #D7E8FF;
+}

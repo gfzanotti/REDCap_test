@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.CheckBox?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Priority?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mi.istitutotumori.app.controller.StandardController"
+      spacing="20"
+      style="-fx-padding: 20;">
+
+    <children>
+
+        <GridPane hgap="20" vgap="15">
+        
+	        <columnConstraints>
+		        <ColumnConstraints hgrow="ALWAYS" />
+		        <ColumnConstraints hgrow="ALWAYS" />
+		    </columnConstraints>
+
+
+            <children>
+
+                <TextField fx:id="tokenStd"
+                           promptText="Token di IMPORT (obbligatorio)"
+                           styleClass="text-field"
+                           GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <Label text="Token new Project"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+
+                <TextField fx:id="recordStdId"
+                           promptText="Record ID (obbligatorio)"
+                           styleClass="text-field"
+                           GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <Label text="ID del record"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                       
+                       
+                <ComboBox fx:id="combo1Std"
+                          prefWidth="300"
+                          GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <Label text="Seleziona Output"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1" />
+					   
+				<!-- 8 CheckBox -->
+				
+				<CheckBox fx:id="medical_history" text="Medical History" selected="true"
+                          GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                          
+                <CheckBox fx:id="laboratory_data" text="Hematology Instrument (Laboratory)"
+                          GridPane.rowIndex="4" GridPane.columnIndex="1" />
+                          
+                <CheckBox fx:id="concomitant_medications" text="Concomitant Medication" selected="true"
+                          GridPane.rowIndex="5" GridPane.columnIndex="0" />
+                
+                <CheckBox fx:id="adverse_events" text="Adverse Event" selected="true"
+                          GridPane.rowIndex="5" GridPane.columnIndex="1" />
+                          
+                <CheckBox fx:id="sae" text="Serious Adverse Event" selected="true"
+                          GridPane.rowIndex="6" GridPane.columnIndex="0" />
+                          
+                <CheckBox fx:id="monitor" text="Monitor" selected="true"
+                          GridPane.rowIndex="6" GridPane.columnIndex="1" />
+                          
+                <CheckBox fx:id="userRole" text="add User Role"
+                          GridPane.rowIndex="7" GridPane.columnIndex="0" />
+                <CheckBox fx:id="flag8" text="NEW-2"
+                          GridPane.rowIndex="7" GridPane.columnIndex="1" />
+                <!-- FINE CheckBox -->
+                          
+                <ComboBox fx:id="comboSceltaProgetto"
+                          prefWidth="300"
+                          GridPane.rowIndex="9" GridPane.columnIndex="0" />
+                <Label text="che tipo di progetto vuoi fare?"
+                       GridPane.rowIndex="9" GridPane.columnIndex="1" />
+
+            </children>
+
+        </GridPane>
+
+    </children>
+
+</VBox>

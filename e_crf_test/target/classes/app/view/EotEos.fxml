@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Priority?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mi.istitutotumori.app.controller.EotEosController"
+      spacing="20"
+      style="-fx-padding: 20;">
+
+    <children>
+
+        <GridPane hgap="20" vgap="15">
+        
+        	<columnConstraints>
+		        <ColumnConstraints hgrow="ALWAYS" />
+		        <ColumnConstraints hgrow="ALWAYS" />
+		    </columnConstraints>
+
+            <children>
+
+                <TextField fx:id="token"
+                           promptText="Token di aggiornamento (obbligatorio)"
+                           styleClass="text-field"
+                           GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <Label text="Token Project"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1" />
+				
+				<ComboBox fx:id="combo1"
+                          prefWidth="300"
+                          GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <Label text="Seleziona Output"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                       
+				<TextArea fx:id="infoTextArea"
+				          editable="false"
+				          wrapText="true"
+				          focusTraversable="false"
+				          prefRowCount="7"
+				          maxWidth="Infinity"
+				          GridPane.rowIndex="5"
+				          GridPane.columnIndex="0"
+				          GridPane.columnSpan="2"
+				          style="-fx-border-color: #80cbc4;
+				          -fx-border-radius: 10; 
+				          -fx-background-color: #e0f2f1; 
+				          -fx-padding: 5;
+				          -fx-font-size: 1.4em;
+				           -fx-font-family:'Verdana';
+				           -fx-font-style: italic;  "  />
+				           
+            </children>
+
+        </GridPane>
+
+    </children>
+
+</VBox>

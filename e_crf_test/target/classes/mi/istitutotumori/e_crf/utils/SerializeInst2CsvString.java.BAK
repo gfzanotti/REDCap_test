@@ -1,0 +1,339 @@
+package mi.istitutotumori.e_crf.utils;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import mi.istitutotumori.e_crf.AbstractInstrument;
+import mi.istitutotumori.e_crf.Field;
+
+/**
+ * Classe con metodi statici per la conversione delle strutture dati
+ * - da un arrray di liste dell'instrument.getField ad una stringa con oggetti Json
+ * - da un oggetto JsonNode ad un file .csv
+ */
+public class SerializeInst2CsvString {
+	
+	private static final Logger dataStructLog = LogManager.getLogger("bl_Logger");
+	
+	private List<AbstractInstrument> instruments;
+	private String filename;
+	private List<List<String>> tableCsv;
+	private String csv;
+	//private List<String> setEliminato = new ArrayList<>();
+	private Set<String> setEliminato = new HashSet<>();
+
+
+	// Colonne richieste da REDCap
+	private static final List<String> COLUMNS = Arrays.asList(
+			"field_name", "form_name", "section_header", "field_type", "field_label",
+			"select_choices_or_calculations", "field_note", "text_validation_type_or_show_slider_number",
+			"text_validation_min", "text_validation_max", "identifier", "branching_logic", "required_field",
+			"custom_alignment", "question_number", "matrix_group_name", "matrix_ranking", "field_annotation"
+			);
+
+	/**
+	 * Costruttore che crea l'attributo "instruments" da cui viene deserializzata la stringa dei dati da inviare
+	 * @param instruments
+	 */
+	public SerializeInst2CsvString(List<AbstractInstrument> instruments, String filename) {
+		super();
+		this.instruments = instruments;
+		this.filename = (filename != null) ? filename : null;
+		this.tableCsv = fromInstrumentsToCSV(instruments);
+		this.csv = wrapperSerializerCsv(instruments, filename);
+	}
+
+	/**
+	 * Costruttore che crea l'attributo "instruments da cui viene deserializzata la stringa dei dati da inviare
+	 * Però prende in ingresso un solo Instrument
+	 * @param instrument
+	 * NON FUNZIOAN na controlla i parametri del vari metodi
+	 */
+	/*
+	public SerializeInst2CsvString(AbstractInstrument instrument, String filename) {
+		super();
+		this.instruments = List.of(instrument);
+		this.filename = (filename != null) ? filename : null;
+		this.tableCsv = fromInstrumentsToCSV(instrument);
+		this.csv = wrapperSerializerCsv(instrument, filename);
+	}
+	*/
+
+
+	/**
+	 * Metodo essenziale per la conversione da instrument.getField.
+	 * Fornisce una forma "tabellare" di liste di stringhe con separatore tra le singole stringhe
+	 * (formato "csv")
+	 * @param data (oggetto Instrument)
+	 */
+	private List<List<String>> fromFieldToCSV(AbstractInstrument data) {
+
+		List<String> varSetInst = data.getVariableNameSet();     // lista dei nomi delle variabili di tutti i fields di QUESTO INSTRUMENT
+		List<List<String>> rows = new ArrayList<>();
+		
+		dataStructLog.info("Inizio tracciamento Branching Logic BLOCCANTI");
+		dataStructLog.info("\t Instrument :  {} ", data.getName());
+
+		for(Field f : data.getFields()) {
+			List<String> row = new ArrayList<>();
+			// Scrittura CSV, prima faccio controllo su branching logic
+			List<String> values = controlBranchingLogic(varSetInst, f, f.getBranchingLogic());
+			
+			row.add(f.getFieldName());
+			row.add(f.getFormName());
+			row.add(f.getSectionHeader());
+			row.add(f.getFieldType());
+			row.add(f.getFieldLabel());
+			row.add(f.getSelectChoicesOrCalculations());
+			row.add(f.getFieldNote());
+			row.add(f.getTextValidationEG());
+			row.add(f.getTextValidationMin());
+			row.add(f.getTextValidationMax());
+			row.add(f.getIdentifier());
+			// scelgo cosa mettere in branching logic
+			row.add(values.get(0));
+			row.add(f.getRequiredField());
+			row.add(f.getCustomAlignment());
+			row.add(f.getQuestionNumber());
+			row.add(f.getMatrixGroupName());
+			row.add(f.getMatrixRanking());
+			// scelgo cosa mettere in field annotation
+			if (values.get(1) == null || values.get(1).isBlank()) {
+			    row.add(f.getFieldAnnotation());
+			} else {
+			    row.add(String.join("  &  ", f.getFieldAnnotation(), values.get(1)));
+			}
+
+			
+
+
+			rows.add(row);
+		}
+
+		return rows;
+	}
+
+	/**
+	 * Wrapper del metodo precedente: public static List<List<String>> fromFieldToCSV(AbstractInstrument data)
+	 * per l'<b>esecuzione su un solo oggetto Instrument</b>
+	 * @param data (oggetto Instrument)
+	 * @param filename o null se voglio solo l'oggetto tipo List<List<String>> csv
+	 * 			e non voglio memorizzare il file *.csv
+	 */
+	//    public static List<List<String>> fromInstrumentToCSV(AbstractInstrument data, String filename) {
+	//    	List<List<String>> csv = new ArrayList<>();
+	//	    csv.add(COLUMNS);
+	//	    csv.addAll(fromFieldToCSV(data));
+	//	    Optional.ofNullable(filename).ifPresent(f -> DeserializeInst2Csv.writeFileCsv(csv, filename));
+	//
+	//	    return csv;
+	//    }
+	//
+	//    public static String wrapperSerializerCsv(AbstractInstrument data, String filename) {
+	//    	List<List<String>> obj = fromInstrumentToCSV(data, filename);
+	//    	return strCsv(obj);
+	//    }
+
+	/**
+	 * Wrapper del metodo precedente: public static List<List<String>> fromFieldToCSV(AbstractInstrument data)
+	 * per l'<b>esecuzione su una lista di oggetti Instruments</b>
+	 * @param data (oggetto Instrument)
+	 * @param filename o null se voglio solo l'oggetto tipo List<List<String>> csv
+	 * 			e non voglio memorizzare il file *.csv
+	 */
+	private List<List<String>> fromInstrumentsToCSV(List<AbstractInstrument> instruments) {
+		List<List<String>> csv = new ArrayList<>();
+		csv.add(COLUMNS); // solo una volta
+
+		for (AbstractInstrument inst : instruments) {
+			csv.addAll(fromFieldToCSV(inst)); // nessuna duplicazione
+		}
+		return csv;
+	}
+
+	private String wrapperSerializerCsv(List<AbstractInstrument> data, String filename) {
+		List<List<String>> obj = fromInstrumentsToCSV(data);
+		Optional.ofNullable(filename).ifPresent(f -> SerializeInst2CsvString.writeFileCsv(obj, filename));
+		return strCsv(obj);
+	}
+
+
+
+	// prende la  tabella/array di liste di stringhe e scrive un file .csv
+	private static void writeFileCsv(List<List<String>> csv, String filename) {
+		// Percorso del file da salvare
+		Path filePath = Paths.get(filename);
+
+		// Prendo solo la directory (senza il nome del file)
+		Path directory = filePath.getParent();
+
+		try {
+			// Crea la directory se non esiste (idempotente)
+			Files.createDirectories(directory);
+		} catch (IOException e) {
+			System.err.println("Errore nella creazione della directory: " + directory);
+			e.printStackTrace();
+			return; // interrompe se non posso creare la directory
+		}
+
+		try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
+			for (List<String> row : csv) {
+				//            	List<String> escaped = new ArrayList<>(row.size());
+				//            	for (String value : row) {
+				//                    escaped.add(escape(value));
+				//                }
+				//writer.write(String.join("\t", row)); // CREA CSV CON TAB COME SEPARATORE
+				writer.write(String.join(",", row));	// CREA CSV CON "," COME SEPARATORE
+				writer.newLine();
+			}
+			System.out.println("✅ File CSV creato: " + filename);
+		} catch (IOException e) {
+			System.err.println("Errore nella scrittura del file CSV: " + filePath);
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Controlla se nella stringa del campo Branching logic ci sono variabili non codificate in
+	 * un intero Instrument e qualora le trova toglie la branching logic bloccante per il
+	 * caricamento e la salva (accodandola) come valore dell'attributo fieldAnnotation
+	 * 
+	 * @param varSetInst è un abstract instrument
+	 * @param str è il valore del campo branching logic di uno specifico field
+	 * @return String da inserire nel valore del rispettivo attributo del metodo fromFieldToCSV
+	 * [DA CONTROLLARE la seguente affermazione]
+	 * Il metodo restituisce una List<String> di due elementi:
+	 * indice 0 → branching logic valida
+	 * indice 1 → branching logic da eliminare
+	 */
+	private List<String> controlBranchingLogic(List<String> varSetInst, Field f, String str) {
+		// List<String> varSetInst = varSetInst.getVariableNameSet();     // lista dei nomi delle variabili di tutti i fields di QUESTO INSTRUMENT
+		List<String> varSetStr = new ArrayList<>();     // lista vuota in cui metto le variabili della branching logic
+		List<String> returnValues = new ArrayList<>();
+		Set<String> nonBlockingVariables = Set.of("event-name");
+
+
+		Pattern pattern = Pattern.compile("\\[(.*?)\\]");  // cerca variabili racchiuse in []
+		Matcher matcher = pattern.matcher(str);
+		while (matcher.find()) {
+			//if (matcher.group(1).equals("event-name")) {continue;}     // ignoro ["event-name"]
+			varSetStr.add(matcher.group(1));     // INSERISCO le variabili della branching logic tranne ["event-name"]
+		}
+
+		if (varSetStr != null && !varSetStr.isEmpty()) {
+			for(String s: varSetStr) {
+				// tratto il set di valori consentiti
+				 if (nonBlockingVariables.contains(s)) {
+					 returnValues.add(0, str);
+					 returnValues.add(1, "");
+					 continue;
+				    }
+				// controllo che tra tutti i nomi delle variabili di tutto l'Instrument non ci sia
+				// quello presente nella branching logic se TRUE tolgo la branching logic bloccante
+				if (!varSetInst.contains(s)) {
+					setEliminato.add(s);
+					returnValues.add(0, "");
+					returnValues.add(1, str);
+					dataStructLog.info("\t\t Field :  {}", f.getFieldName());
+					dataStructLog.info("\t variabile non presente : {} \n\t\t branching logic :  {} \n", s, str);
+					break;
+				} else { // se invece la variabile esiste e la branching logic non è bloccante ...
+					returnValues.add(0, str);
+					returnValues.add(1, "");
+					}
+			}
+		} else {
+			returnValues.add(0, "");
+			returnValues.add(1, "");
+		}		
+		return returnValues;
+	}
+
+	/**
+	 * metodo che serializza un oggetto List<List<String>> (tabella/array di liste di stringhe) in uno String
+	 * per l'invio tramite API
+	 * @param  List<List<String>> rows
+	 * @throws IOException
+	 */
+	private static String strCsv(List<List<String>> rows) {
+
+		StringBuilder sb = new StringBuilder();
+
+		for (List<String> row : rows) {
+			for (int c = 0; c < row.size(); c++) {
+				String value = row.get(c);
+				if (value == null) {
+					value = "";
+				}
+				
+				value = value.replace("\"", "\"\""); // escape delle virgolette
+				value = "\"" + value + "\"";         // racchiudi tra virgolette
+				/*
+				if (value.contains(",") || value.contains("\"") || value.contains("\n") || value.contains("<")) {
+					value = value.replace("\"", "\"\""); // escape delle virgolette
+					value = "\"" + value + "\"";         // racchiudi tra virgolette
+				}
+				*/
+
+				sb.append(value);
+
+				if (c < row.size() - 1) {
+					sb.append(",");
+				}
+			}
+			sb.append("\n");
+		}
+		return sb.toString();
+	} // end method strCsv()
+
+
+	// utile per la conversione alla tabella/array di liste di stringhe precedente
+	static String escape(String value) {
+		if (value == null) {
+			return "";
+		}
+		//value = value.trim();
+		if (value.contains(",") || value.contains("|") || value.contains("\n")) {
+			// value = "\"" + value.replace("\"", "\"\"") + "\"";
+			value = "\"" + value + "\"";
+
+			// value = "\"" + value.replace("\"", "\"\"") + "\"";
+			// value = value.replace("\"", "\\\"");
+
+		}
+		return value;
+	}
+
+	public List<AbstractInstrument> getInstruments() {
+		return instruments;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public List<List<String>> getTableCsv() {
+		return tableCsv;
+	}
+
+	public String getCsv() {
+		return csv;
+	}
+
+	public Set<String> getSetEliminato() {
+		return setEliminato;
+	}
+}

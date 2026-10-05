@@ -1,0 +1,43 @@
+.root {
+    -fx-base: #1e1e1e;
+    -fx-background: #1e1e1e;
+    -fx-control-inner-background: #252526;
+    -fx-text-fill: #d4d4d4;
+}
+
+.label {
+    -fx-text-fill: #dddddd;
+}
+
+.button {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+}
+
+.button:hover {
+    -fx-background-color: #505050;
+}
+
+.run-button {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.run-button:hover {
+    -fx-background-color: #1f8bd3;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background-color: #2d2d30;
+}
+
+.tab {
+    -fx-background-color: #333333;
+}
+
+.tab:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+}
